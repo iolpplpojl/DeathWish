@@ -1,0 +1,4 @@
+repository "Deathwish@dlghtmd1224@cloud"
+  path "/"
+    br "/main"
+    co "/main"
