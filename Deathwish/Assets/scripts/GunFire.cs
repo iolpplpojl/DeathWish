@@ -33,6 +33,8 @@ public class GunFire : MonoBehaviour
     CinemachineBasicMultiChannelPerlin shaky;
     private void Start()
     {
+        SetGun();
+
         Gunsound = GetComponent<AudioSource>();
         Cam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
         shaky = Cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -85,7 +87,7 @@ public class GunFire : MonoBehaviour
     void Update()
     {
         firerateCalc();
-        CamCool();
+        coolrecoil();
         if (Input.GetMouseButton(0) && nowfirerate <= 0 && MainArm != 0 && Whicharm==false && MainReloading == false && Fullauto[0] == true)
         {
             Fire(guntype[0], gundamage[0], gunspeed[0]);
@@ -137,16 +139,14 @@ public class GunFire : MonoBehaviour
             nowfirerate -= Time.deltaTime;
         }
     }
-    void CamCool()
+
+    void coolrecoil()
     {
         if (nowrecoil > 0)
         {
-            nowrecoil -= Time.deltaTime*10;
-            shaky.m_AmplitudeGain = nowrecoil;
-            shaky.m_FrequencyGain = nowrecoil;
+            nowrecoil -= Time.deltaTime * 10;
         }
     }
-
     void reloadMain()
     {
         if (MainArmAmmo >= Mainmaxammo) // 120 >= 30
@@ -230,5 +230,22 @@ public class GunFire : MonoBehaviour
                 SideArmAmmo += Sidemaxammo / B;
             }
         }
+    }
+    void SetGun()
+    {
+        GunSelect GunValue = GameObject.Find("GunManager").GetComponent<GunSelect>();
+
+        gundamage = GunValue.GetDamage();
+        gunspeed = GunValue.GetSpeed();
+        Fullauto = GunValue.GetFullAuto();
+        recoil = GunValue.GetRecoil();
+        Mainmaxammo = GunValue.GetMainMaxAmmo();
+        MainArmAmmo = GunValue.GetMainAmmo();
+        Sidemaxammo = GunValue.GetSideMaxAmmo();
+        SideArmAmmo = GunValue.GetSideAmmo();
+        guntype = GunValue.GetGunType();
+        gunfirerate = GunValue.GetGunFireRate();
+        reloadtime = GunValue.GetReloadTime();
+
     }
 }
