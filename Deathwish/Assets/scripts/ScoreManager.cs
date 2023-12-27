@@ -40,6 +40,14 @@ public class ScoreManager : MonoBehaviour
         Combo = 1.5f;
         WhileCombo++;
     }
+    public void GetAmmo()
+    {
+        if (gocombo == true)
+        {
+            Score += 200;
+            Combo += 0.2f;
+        }
+    }
     void Scoring()
     {
         gocombo = false;

@@ -13,6 +13,7 @@ TagManager:
   - GunManager
   - StopManager
   - gun
+  - ScoreManager
   layers:
   - Default
   - TransparentFX

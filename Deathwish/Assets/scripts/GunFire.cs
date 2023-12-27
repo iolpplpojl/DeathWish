@@ -121,13 +121,13 @@ public class GunFire : MonoBehaviour
         {
             Fire(guntype[1], gundamage[1], gunspeed[1]);
         }
-        else if (MainArm == 0 && Input.GetMouseButtonDown(0) && MainReloading == false && Whicharm == false && MainArmAmmo != 0)
+        else if (MainArm == 0 && Input.GetMouseButton(0) && MainReloading == false && Whicharm == false && MainArmAmmo != 0)
         {
             MainReloading = true;
             Invoke("reloadMain", reloadtime[0]);
 
         }
-        else if (SideArm == 0 && Input.GetMouseButtonDown(0) && SideReloading == false && Whicharm == true && SideArmAmmo != 0)
+        else if (SideArm == 0 && Input.GetMouseButton(0) && SideReloading == false && Whicharm == true && SideArmAmmo != 0)
         {
             SideReloading = true;
             Invoke("reloadSide", reloadtime[1]);

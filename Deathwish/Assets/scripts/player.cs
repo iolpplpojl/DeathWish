@@ -12,11 +12,13 @@ public class player : MonoBehaviour
     public float health = 500f;
     public float speed = 3f;
     bool getted = false;
+    ScoreManager GetAmmoCombo;
     void Awake()
     {
         Rigid = GetComponent<Rigidbody2D>();
         Gun = GetComponentInChildren<GunFire>();
         stop = GameObject.FindWithTag("StopManager").GetComponent<StopManager>();
+        GetAmmoCombo = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,5 +58,6 @@ public class player : MonoBehaviour
     {
         Gun.ammoget(collision.GetComponent<AmmoDrop>().getammotype(), collision.GetComponent<AmmoDrop>().getammoamount());
         collision.GetComponent<AmmoDrop>().Get();
+        GetAmmoCombo.GetAmmo();
     }
 }

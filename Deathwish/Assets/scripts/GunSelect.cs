@@ -128,19 +128,19 @@ public class GunSelect : MonoBehaviour
                 gundamage[0] = 100;
                 gunspeed[0] = 50;
                 Fullauto[0] = true;
-                recoil[0] = 0.75f;
+                recoil[0] = 1f;
                 Mainmaxammo = 24;
                 MainArmAmmo = 24;
                 guntype[0] = 0;
                 gunfirerate[0] = 0.08f;
-                reloadtime[0] = 0.3f;
+                reloadtime[0] = 0.50f;
                 gunrecoil[0] = 1.5f;
                 break;
             case 2: // MP9
                 gundamage[0] = 50;
                 gunspeed[0] = 50;
                 Fullauto[0] = true;
-                recoil[0] = 0.5f;
+                recoil[0] = 0.75f;
                 Mainmaxammo = 30;
                 MainArmAmmo = 15;
                 guntype[0] = 0;
@@ -167,13 +167,13 @@ public class GunSelect : MonoBehaviour
                 gundamage[1] = 100;
                 gunspeed[1] = 50;
                 Fullauto[1] = false;
-                recoil[1] = 0.45f;
+                recoil[1] = 0.75f;
                 Sidemaxammo = 7;
                 SideArmAmmo = 21;
                 guntype[1] = 0;
                 gunfirerate[1] = 0.03f;
-                reloadtime[1] = 0.22f;
-                gunrecoil[1] = 0.3f;
+                reloadtime[1] = 0.45f;
+                gunrecoil[1] = 0.22f;
                 break;
             case 2: // Sawed-off
                 gundamage[1] = 20;
@@ -184,7 +184,7 @@ public class GunSelect : MonoBehaviour
                 SideArmAmmo = 2;
                 guntype[1] = 1;
                 gunfirerate[1] = 0.01f;
-                reloadtime[1] = 0.3f;
+                reloadtime[1] = 0.45f;
                 gunrecoil[1] = 7.5f;
                 break;
             case 3: // Tec-9
@@ -196,7 +196,7 @@ public class GunSelect : MonoBehaviour
                 SideArmAmmo = 24;
                 guntype[1] = 0;
                 gunfirerate[1] = 0.044f;
-                reloadtime[1] = 0.24f;
+                reloadtime[1] = 0.45f;
                 gunrecoil[1] = 2f;
                 break;
         }
