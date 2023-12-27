@@ -6,7 +6,7 @@ public class player : MonoBehaviour
 {
     // Start is called before the first frame update
     Rigidbody2D Rigid;
-
+    StopManager stop;
     GunFire Gun;
     Vector2 inputVec;
     public float health = 500f;
@@ -16,7 +16,7 @@ public class player : MonoBehaviour
     {
         Rigid = GetComponent<Rigidbody2D>();
         Gun = GetComponentInChildren<GunFire>();
-
+        stop = GameObject.FindWithTag("StopManager").GetComponent<StopManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,9 +36,11 @@ public class player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
+        if (stop.GetStop() == false)
+        {
+            inputVec.x = Input.GetAxisRaw("Horizontal");
+            inputVec.y = Input.GetAxisRaw("Vertical");
+        }
         if (health < 0)
         {
             Debug.Log("DED");

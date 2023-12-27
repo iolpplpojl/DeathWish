@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        if (health < 0 && dead == false)
+        if (health <= 0 && dead == false)
         {
             Debug.Log("DED");
             Dead();

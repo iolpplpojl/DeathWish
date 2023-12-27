@@ -10,6 +10,7 @@ public class GunSelect : MonoBehaviour
     int[] gunspeed = { 0,0 };
     bool[] Fullauto = {false,false};
     float[] recoil ={0f,0f};
+    float[] gunrecoil = { 0f, 0f };
     int Sidemaxammo;
     int Mainmaxammo;
     int MainArmAmmo;
@@ -18,28 +19,35 @@ public class GunSelect : MonoBehaviour
     float[] gunfirerate = {0,0};
     float[] reloadtime = { 0, 0 };
 
-    int[] GunType = { 1, 1 };
+    int[] GunType = {0,0};
 
     public bool selected;
     GunFire Gun;
 
     void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
+        // SoundManager 인스턴스가 이미 있는지 확인, 이 상태로 설정
+        GunType[0] = 1;
+        GunType[1] = 1;
+        if (instance == null)
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+
+        // 인스턴스가 이미 있는 경우 오브젝트 제거
+        else if (instance != this)
+            Destroy(gameObject);
+
+        // 이렇게 하면 다음 scene으로 넘어가도 오브젝트가 사라지지 않습니다.
+        DontDestroyOnLoad(gameObject);
+
         SetGunType(GunType);
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
 
     }
 
@@ -62,7 +70,10 @@ public class GunSelect : MonoBehaviour
     {
         return recoil;
     }
-
+    public float[] GetGunRecoil()
+    {
+        return gunrecoil;
+    }
     public int GetMainMaxAmmo()
     {
         return Mainmaxammo;
@@ -97,36 +108,96 @@ public class GunSelect : MonoBehaviour
     {
         return reloadtime;
     }
+    public void SetGunTypes(int[] Num)
+    {
+
+
+        GunType = Num;
+        SetGunType(Num);
+    }
 
 
     void SetGunType(int[] Num)
     {
+        Debug.Log(Num[0]);
+        Debug.Log(Num[1]);
+
         switch (Num[0])
         {
-            case 1:
-                gundamage[0] = 50;
+            case 1: //M4A1
+                gundamage[0] = 100;
                 gunspeed[0] = 50;
                 Fullauto[0] = true;
                 recoil[0] = 0.75f;
                 Mainmaxammo = 24;
                 MainArmAmmo = 24;
                 guntype[0] = 0;
+                gunfirerate[0] = 0.08f;
+                reloadtime[0] = 0.3f;
+                gunrecoil[0] = 1.5f;
+                break;
+            case 2: // MP9
+                gundamage[0] = 50;
+                gunspeed[0] = 50;
+                Fullauto[0] = true;
+                recoil[0] = 0.5f;
+                Mainmaxammo = 30;
+                MainArmAmmo = 15;
+                guntype[0] = 0;
                 gunfirerate[0] = 0.06f;
                 reloadtime[0] = 0.22f;
+                gunrecoil[0] = 1.5f;
+                break;
+            case 3: // M3
+                gundamage[0] = 50;
+                gunspeed[0] = 50;
+                Fullauto[0] = false;
+                recoil[0] = 3f;
+                Mainmaxammo = 6;
+                MainArmAmmo = 6;
+                guntype[0] = 1;
+                gunfirerate[0] = 0.75f;
+                reloadtime[0] = 0.6f;
+                gunrecoil[0] = 6.5f;
                 break;
         }
         switch (Num[1])
         {
-            case 1:
+            case 1: // M1911
+                gundamage[1] = 100;
+                gunspeed[1] = 50;
+                Fullauto[1] = false;
+                recoil[1] = 0.45f;
+                Sidemaxammo = 7;
+                SideArmAmmo = 21;
+                guntype[1] = 0;
+                gunfirerate[1] = 0.03f;
+                reloadtime[1] = 0.22f;
+                gunrecoil[1] = 0.3f;
+                break;
+            case 2: // Sawed-off
                 gundamage[1] = 20;
                 gunspeed[1] = 50;
                 Fullauto[1] = false;
                 recoil[1] = 3f;
-                Sidemaxammo = 6;
-                SideArmAmmo = 6;
+                Sidemaxammo = 2;
+                SideArmAmmo = 2;
                 guntype[1] = 1;
-                gunfirerate[1] = 0.6f;
+                gunfirerate[1] = 0.01f;
                 reloadtime[1] = 0.3f;
+                gunrecoil[1] = 7.5f;
+                break;
+            case 3: // Tec-9
+                gundamage[1] = 70;
+                gunspeed[1] = 50;
+                Fullauto[1] = true;
+                recoil[1] = 0.75f;
+                Sidemaxammo = 12;
+                SideArmAmmo = 24;
+                guntype[1] = 0;
+                gunfirerate[1] = 0.044f;
+                reloadtime[1] = 0.24f;
+                gunrecoil[1] = 2f;
                 break;
         }
     }

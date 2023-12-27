@@ -156,8 +156,7 @@ public class EnemyPatrol : MonoBehaviour
                 lastrotation = transform.rotation;
             }
             agent.SetDestination(lastwatch);
-            Debug.Log("Agent Rotation: " + lastwatch);
-            Debug.Log("Agent Rotation: " + transform.rotation.eulerAngles);
+
 
             if (!agent.pathPending)
             {

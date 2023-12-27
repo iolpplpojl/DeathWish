@@ -6,15 +6,20 @@ public class FollowMouse : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform m_transform;
+    StopManager stop;
     void Start()
     {
+        stop = GameObject.FindWithTag("StopManager").GetComponent<StopManager>();
         m_transform = this.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rotateToCamera();
+        if (stop.GetStop() == false)
+        {
+            rotateToCamera();
+        }
 
     }
     void rotateToCamera()

@@ -10,6 +10,9 @@ TagManager:
   - waypoints
   - EnemyBullet
   - Ammo
+  - GunManager
+  - StopManager
+  - gun
   layers:
   - Default
   - TransparentFX

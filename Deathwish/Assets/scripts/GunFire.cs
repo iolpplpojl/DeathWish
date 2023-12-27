@@ -27,13 +27,17 @@ public class GunFire : MonoBehaviour
     public int[] gunspeed;
     public bool[] Fullauto;
     public float[] recoil;
+    public float[] gunrecoil;
     public float nowrecoil;
     AudioSource Gunsound;
     CinemachineVirtualCamera Cam;
     CinemachineBasicMultiChannelPerlin shaky;
+    StopManager stop;
+
     private void Start()
     {
         SetGun();
+        stop = GameObject.FindWithTag("StopManager").GetComponent<StopManager>();
 
         Gunsound = GetComponent<AudioSource>();
         Cam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
@@ -44,43 +48,56 @@ public class GunFire : MonoBehaviour
     }
     void Fire(int guntype, int gundamage,int gunspeed)
     {
-        
-        if (guntype == 0)
+        if (stop.GetStop() == false)
         {
-            firerate = gunfirerate[0];
-            Quaternion rotate = Shotpoint.rotation * Quaternion.Euler(0, 0, Random.Range(-3.25f, 3.25f));
-            GameObject createdObject = Instantiate(bullet, transform.position, rotate);
-            bulletLogic objectvalues = createdObject.GetComponent<bulletLogic>();
-            objectvalues.damage = gundamage;
-            objectvalues.speed = gunspeed;
-            nowrecoil += recoil[0];
-        }
-        if (guntype == 1)
-        {
-            firerate = gunfirerate[1];
-            for (int i = 0; i <= 12; i++)
+            int M_int;
+            if (Whicharm)
             {
-                Quaternion rotate = transform.rotation * Quaternion.Euler(0, 0, Random.Range(-7.5f, 7.5f));
+                M_int = 1;
+            }
+            else
+            {
+                M_int = 0;
+            }
+            if (guntype == 0)
+            {
+                Quaternion rotate = Shotpoint.rotation * Quaternion.Euler(0, 0, Random.Range(-gunrecoil[M_int], gunrecoil[M_int]));
                 GameObject createdObject = Instantiate(bullet, transform.position, rotate);
                 bulletLogic objectvalues = createdObject.GetComponent<bulletLogic>();
                 objectvalues.damage = gundamage;
-                objectvalues.speed = Random.Range(gunspeed-10, gunspeed+10);
+                objectvalues.speed = gunspeed;
             }
-            nowrecoil += recoil[1];
-        }
-        if (Whicharm)
-        {
-            SideArm -= 1;
-        }
-        else
-        {
-            MainArm -= 1;
-        }
-        shaky.m_AmplitudeGain = nowrecoil;
-        shaky.m_FrequencyGain = nowrecoil;
-        nowfirerate = firerate;
-        Gunsound.Play();
+            if (guntype == 1)
+            {
+                for (int i = 0; i <= 12; i++)
+                {
+                    Quaternion rotate = transform.rotation * Quaternion.Euler(0, 0, Random.Range(-gunrecoil[M_int], gunrecoil[M_int]));
+                    GameObject createdObject = Instantiate(bullet, transform.position, rotate);
+                    bulletLogic objectvalues = createdObject.GetComponent<bulletLogic>();
+                    objectvalues.damage = gundamage;
+                    objectvalues.speed = Random.Range(gunspeed - 10, gunspeed + 10);
+                }
+            }
+            if (Whicharm)
+            {
+                SideArm -= 1;
+                firerate = gunfirerate[1];
+                nowrecoil += recoil[1];
+            }
+            else
+            {
+                firerate = gunfirerate[0];
+                MainArm -= 1;
+                nowrecoil += recoil[0];
 
+            }
+            shaky.m_AmplitudeGain = nowrecoil;
+            shaky.m_FrequencyGain = nowrecoil;
+            nowfirerate = firerate;
+            Gunsound.Play();
+            Debug.Log(firerate);
+
+        }
     }
 
     // Update is called once per frame
@@ -194,16 +211,18 @@ public class GunFire : MonoBehaviour
     }
     void ChangeGun()
     {
-        if (Whicharm == false)
+        if (stop.GetStop() == false)
         {
-            Whicharm = true;
+            if (Whicharm == false)
+            {
+                Whicharm = true;
+            }
+            else
+            {
+                Whicharm = false;
+            }
+            nowfirerate = 0f;
         }
-        else
-        {
-            Whicharm = false;
-        }
-        nowfirerate = 0f;
-
     }
 
     public void ammoget(bool A, int B)
@@ -231,10 +250,10 @@ public class GunFire : MonoBehaviour
             }
         }
     }
-    void SetGun()
+    public void SetGun()
     {
-        GunSelect GunValue = GameObject.Find("GunManager").GetComponent<GunSelect>();
-
+        Debug.Log("SetGun");
+        GunSelect GunValue = GameObject.FindWithTag("GunManager").GetComponent<GunSelect>();
         gundamage = GunValue.GetDamage();
         gunspeed = GunValue.GetSpeed();
         Fullauto = GunValue.GetFullAuto();
@@ -246,6 +265,12 @@ public class GunFire : MonoBehaviour
         guntype = GunValue.GetGunType();
         gunfirerate = GunValue.GetGunFireRate();
         reloadtime = GunValue.GetReloadTime();
+        gunrecoil = GunValue.GetGunRecoil();
+        MainArm = Mainmaxammo;
+        SideArm = Sidemaxammo;
+        nowrecoil = 0f;
+        Debug.Log(gunfirerate[0]);
+        Debug.Log(gunfirerate[1]);
 
     }
 }
