@@ -22,10 +22,15 @@ public class CamCool : MonoBehaviour
 
         if (nowrecoil > 0)
         {
-                nowrecoil -= Time.deltaTime * 10;
-                shaky.m_AmplitudeGain = nowrecoil;
-                shaky.m_FrequencyGain = nowrecoil;
+            nowrecoil -= Time.deltaTime * 10;
+            shaky.m_AmplitudeGain = nowrecoil;
+            shaky.m_FrequencyGain = nowrecoil;
         }
-    
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            nowrecoil = 0;
+            shaky.m_AmplitudeGain = 0;
+            shaky.m_FrequencyGain = 0;
+        }
     }
 }

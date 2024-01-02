@@ -11,14 +11,17 @@ public class player : MonoBehaviour
     Vector2 inputVec;
     public float health = 500f;
     public float speed = 3f;
+    Vector3 StartTransform;
     bool getted = false;
     ScoreManager GetAmmoCombo;
+    bool ded;
     void Awake()
     {
         Rigid = GetComponent<Rigidbody2D>();
         Gun = GetComponentInChildren<GunFire>();
         stop = GameObject.FindWithTag("StopManager").GetComponent<StopManager>();
         GetAmmoCombo = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
+        StartTransform = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +36,11 @@ public class player : MonoBehaviour
             collision.GetComponent<AmmoDrop>().Getted = true;
             getammo(collision);
         }
+        if (collision.CompareTag("Exit") && GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>().Getclear() == true)
+        {
+            collision.GetComponent<ExitDoor>().exitdoor();
+            GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>().goNextFloor();
+        }   
 
     }
     // Update is called once per frame
@@ -45,8 +53,7 @@ public class player : MonoBehaviour
         }
         if (health < 0)
         {
-            Debug.Log("DED");
-            gameObject.SetActive(false);
+            Death();
         }
     }
     private void FixedUpdate()
@@ -59,5 +66,22 @@ public class player : MonoBehaviour
         Gun.ammoget(collision.GetComponent<AmmoDrop>().getammotype(), collision.GetComponent<AmmoDrop>().getammoamount());
         collision.GetComponent<AmmoDrop>().Get();
         GetAmmoCombo.GetAmmo();
+    }
+    public void Death()
+    {
+        Debug.Log("DED");
+        ded = true;
+        gameObject.SetActive(false);
+    }
+
+    public void Restart()
+    {
+        ded = false;
+        transform.position = StartTransform;
+        health = 100;
+    }
+    public bool getded()
+    {
+        return ded;
     }
 }

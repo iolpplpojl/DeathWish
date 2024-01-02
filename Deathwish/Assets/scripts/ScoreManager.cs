@@ -10,10 +10,12 @@ public class ScoreManager : MonoBehaviour
     int WeaponDIff = 8;
     int WhileCombo;
     bool gocombo;
-
+    Restart Restart;
     void Start()
     {
         Score = 0;
+        Restart = GameObject.FindWithTag("RestartManager").GetComponent<Restart>();
+
     }
 
     // Update is called once per frame
@@ -27,7 +29,13 @@ public class ScoreManager : MonoBehaviour
         {
             Scoring();
         }
-        
+        if (Input.GetKeyDown(KeyCode.F) && Restart.GetDeath()==true)
+        {
+            Combo = 0;
+            WhileCombo = 0;
+            gocombo = false;
+            Score = 0;
+        }
     }
     public int GetScore()
     {

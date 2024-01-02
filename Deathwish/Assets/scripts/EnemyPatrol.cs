@@ -26,6 +26,7 @@ public class EnemyPatrol : MonoBehaviour
         level = 0;
         agent = GetComponent<NavMeshAgent>();
         Fire = GetComponent<EnemyGunFire>();
+        target = GameObject.FindWithTag("Player").transform;
         agent.enabled = false;
         agent.updateRotation = false;
         agent.updateUpAxis = false;

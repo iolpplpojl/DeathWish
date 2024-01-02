@@ -34,6 +34,8 @@ public class GunFire : MonoBehaviour
     CinemachineBasicMultiChannelPerlin shaky;
     StopManager stop;
 
+    public int[] RePoAmmo = {0,0};
+    public int[] RePoArmAmmo = {0,0};
     private void Start()
     {
         SetGun();
@@ -45,6 +47,8 @@ public class GunFire : MonoBehaviour
         MainArm = Mainmaxammo;
         SideArm = Sidemaxammo;
         nowrecoil = 0f;
+        SetAmmo();
+
     }
     void Fire(int guntype, int gundamage,int gunspeed)
     {
@@ -269,8 +273,23 @@ public class GunFire : MonoBehaviour
         MainArm = Mainmaxammo;
         SideArm = Sidemaxammo;
         nowrecoil = 0f;
+        SetAmmo();
         Debug.Log(gunfirerate[0]);
         Debug.Log(gunfirerate[1]);
+    }
+    void SetAmmo()
+    {
+        RePoAmmo[0] = MainArm;
+        RePoAmmo[1] = SideArm;
+        RePoArmAmmo[0] = MainArmAmmo;
+        RePoArmAmmo[1] = SideArmAmmo;
+    }
+    public void Refill() {
+        nowrecoil = 0;
+        MainArm = RePoAmmo[0];
+        SideArm = RePoAmmo[1];
+        MainArmAmmo = RePoArmAmmo[0];
+        SideArmAmmo = RePoArmAmmo[1];
 
     }
 }

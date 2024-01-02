@@ -35,15 +35,21 @@ public class Enemy : MonoBehaviour
         }
     }
     void Dead()
-    {
+    { 
+        GameObject EM = GameObject.Find("EnemyManager");
+
+        EnemyManager Count = EM.GetComponent<EnemyManager>();
+
         dead = true;
         if (hasammo == true)
         {
             GameObject Mammo = Instantiate(Ammo, transform.position, Quaternion.identity);
+            Mammo.transform.SetParent(EM.transform, true);
             Mammo.GetComponent<AmmoDrop>().setammotype(AmmoType, AmmoAmount);
         }
         ScoreManager Score = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         Score.Kill();
+        Count.Kill();
         gameObject.SetActive(false);
     }
 }

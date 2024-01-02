@@ -7,18 +7,37 @@ public class Restart : MonoBehaviour
 {
     // Start is called before the first frame update
     public string Scene;
+    GameObject player;
+    bool death = false;
+    player PlayerPos;
+    GunFire gun;
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Player");
+        PlayerPos = player.GetComponent<player>();
+        gun = player.GetComponentInChildren<GunFire>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (PlayerPos.getded() == true)
         {
-            SceneManager.LoadScene(Scene);
-
+            death = true;
         }
+        else
+        {
+            death = false;
+        }
+        if (Input.GetKeyDown(KeyCode.F) && death == true)
+        {
+            player.SetActive(true);
+            PlayerPos.Restart();
+            gun.Refill();
+        }
+    }
+    public bool GetDeath()
+    {
+        return death;
     }
 }
