@@ -312,6 +312,7 @@ MonoBehaviour:
   - {fileID: 7953938436520001476, guid: 57f549fd29b77244998c89a162c13894, type: 3}
   - {fileID: 2597823438573138831, guid: eb976f6a3a83d3144ab563b4bb013189, type: 3}
   Blood2: {fileID: 3640483067856713420, guid: 9ef6e03cfa304cf4b84074f7ba97b8a6, type: 3}
+  Body: {fileID: 2471749325345063256, guid: ec65d79cf6fa99f41b4e6e0725e3daf4, type: 3}
 --- !u!61 &8654035237947834720
 BoxCollider2D:
   m_ObjectHideFlags: 0
