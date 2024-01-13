@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     // Start is called before the first frame update
     int Score;
+    int MidScore;
     float Combo;
     int WeaponDIff = 8;
     int WhileCombo;
@@ -15,7 +16,7 @@ public class ScoreManager : MonoBehaviour
     {
         Score = 0;
         Restart = GameObject.FindWithTag("RestartManager").GetComponent<Restart>();
-
+        MidScore = 0;
     }
 
     // Update is called once per frame
@@ -31,10 +32,10 @@ public class ScoreManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F) && Restart.GetDeath()==true)
         {
-            Combo = 0;
-            WhileCombo = 0;
-            gocombo = false;
-            Score = 0;
+           Combo = 0;
+           WhileCombo = 0;
+           gocombo = false;
+           Score = MidScore;
         }
     }
     public int GetScore()
@@ -70,5 +71,12 @@ public class ScoreManager : MonoBehaviour
     public float GetCombo()
     {
         return Combo;
+    }
+    public void Checkpoint()
+    {
+        Combo = 0;
+        WhileCombo = 0;
+        gocombo = false;
+        MidScore = Score;
     }
 }

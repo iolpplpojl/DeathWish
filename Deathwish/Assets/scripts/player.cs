@@ -21,7 +21,7 @@ public class player : MonoBehaviour
         Gun = GetComponentInChildren<GunFire>();
         stop = GameObject.FindWithTag("StopManager").GetComponent<StopManager>();
         GetAmmoCombo = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
-        StartTransform = transform.position;
+        SetPos();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,7 +73,10 @@ public class player : MonoBehaviour
         ded = true;
         gameObject.SetActive(false);
     }
-
+    public void SetPos()
+    {
+        StartTransform = transform.position;
+    }
     public void Restart()
     {
         ded = false;

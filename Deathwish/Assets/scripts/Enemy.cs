@@ -12,35 +12,68 @@ public class Enemy : MonoBehaviour
     public bool hasammo;
     bool dead = false;
     EnemyGunFire Gun;
-
+    public GameObject[] Blood;
+    public GameObject Blood2;
+    GameObject EM;
     // Update is called once per frame
     private void Awake()
     {
+        EM = GameObject.Find("EnemyManager");
         Gun = GetComponent<EnemyGunFire>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Bullet"))
+        if (collision.CompareTag("Bullet") && dead ==false)
         {
-            return;
+            bulletLogic bul = collision.GetComponent<bulletLogic>();
+            if (bul.hited == false)
+            {
+                bul.hited = true;
+                health -= bul.damage;
+                for (int i = 0; i < 0; i++)
+                {
+                    GameObject Blud = Instantiate(Blood[Random.Range(0, Blood.Length)], transform.position, Quaternion.identity);
+                    Blud.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f))*7f, ForceMode2D.Impulse);
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    GameObject Blud = Instantiate(Blood2, transform.position, collision.transform.rotation * Quaternion.Euler(0f, 0f, Random.Range(-10f, 10f)));
+                    Blud.GetComponent<BloodMove>().SetBlood(Random.Range(5, 20), Random.Range(3.0f, 14.0f));
+                    Blud.transform.SetParent(EM.transform, true);
+
+                }
+                if (health <= 0 && dead == false)
+                {
+                    Debug.Log("DED");
+                    Dead();
+                }
+                Debug.Log("ouch");
+                Debug.Log(health);
+                Debug.Log(bul.damage);
+
+            }
+
         }
+    }
+    private void Update()
+    {
         if (health <= 0 && dead == false)
         {
             Debug.Log("DED");
             Dead();
         }
-        else
-        {
-            health -= collision.GetComponent<bulletLogic>().damage;
-        }
     }
     void Dead()
-    { 
-        GameObject EM = GameObject.Find("EnemyManager");
-
-        EnemyManager Count = EM.GetComponent<EnemyManager>();
-
+    {
         dead = true;
+        EnemyManager Count = EM.GetComponent<EnemyManager>();
+        for (int i = 0; i < 12; i++)
+        {
+            GameObject Blud = Instantiate(Blood2, transform.position, transform.rotation * Quaternion.Euler(0f, 0f, Random.Range(-120f, 120f)));
+            Blud.GetComponent<BloodMove>().SetBlood(Random.Range(5, 20), Random.Range(3.0f, 7.0f));
+            Blud.transform.SetParent(EM.transform, true);
+        }
+
         if (hasammo == true)
         {
             GameObject Mammo = Instantiate(Ammo, transform.position, Quaternion.identity);

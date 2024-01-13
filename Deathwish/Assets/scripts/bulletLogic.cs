@@ -11,6 +11,7 @@ public class bulletLogic : MonoBehaviour
     public float maxRayDistance;
     public float damage;
     public string whoshot;
+    public bool hited = false;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();

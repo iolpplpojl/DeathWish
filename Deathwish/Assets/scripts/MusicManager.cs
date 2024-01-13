@@ -40,4 +40,9 @@ public class MusicManager : MonoBehaviour
         PlayMusic.clip = Music[MusicIndex];
         PlayMusic.Play();
     }
+    public void ChangeIndex(int Index)
+    {
+        MusicIndex = Index;
+        Go = true;
+    }
 }

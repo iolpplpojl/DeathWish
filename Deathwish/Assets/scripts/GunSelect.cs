@@ -19,7 +19,7 @@ public class GunSelect : MonoBehaviour
     float[] gunfirerate = {0,0};
     float[] reloadtime = { 0, 0 };
 
-    int[] GunType = {0,0};
+    int[] GunType = {999,999};
 
     public bool selected;
     GunFire Gun;
@@ -27,8 +27,6 @@ public class GunSelect : MonoBehaviour
     void Awake()
     {
         // SoundManager 인스턴스가 이미 있는지 확인, 이 상태로 설정
-        GunType[0] = 1;
-        GunType[1] = 1;
         if (instance == null)
             instance = this;
 
@@ -160,6 +158,18 @@ public class GunSelect : MonoBehaviour
                 reloadtime[0] = 0.6f;
                 gunrecoil[0] = 6.5f;
                 break;
+            case 999:
+                gundamage[0] = 1;
+                gunspeed[0] = 50;
+                Fullauto[0] = false;
+                recoil[0] = 3f;
+                Mainmaxammo = 0;
+                MainArmAmmo = 0;
+                guntype[0] = 1;
+                gunfirerate[0] = 0.75f;
+                reloadtime[0] = 0.6f;
+                gunrecoil[0] = 6.5f;
+                break;
         }
         switch (Num[1])
         {
@@ -198,6 +208,18 @@ public class GunSelect : MonoBehaviour
                 gunfirerate[1] = 0.044f;
                 reloadtime[1] = 0.45f;
                 gunrecoil[1] = 2f;
+                break;
+            case 999:
+                gundamage[0] = 1;
+                gunspeed[0] = 50;
+                Fullauto[0] = false;
+                recoil[0] = 3f;
+                Mainmaxammo = 0;
+                MainArmAmmo = 0;
+                guntype[0] = 1;
+                gunfirerate[0] = 0.75f;
+                reloadtime[0] = 0.6f;
+                gunrecoil[0] = 6.5f;
                 break;
         }
     }

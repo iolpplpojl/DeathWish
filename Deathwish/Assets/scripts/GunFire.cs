@@ -277,7 +277,7 @@ public class GunFire : MonoBehaviour
         Debug.Log(gunfirerate[0]);
         Debug.Log(gunfirerate[1]);
     }
-    void SetAmmo()
+    public void SetAmmo()
     {
         RePoAmmo[0] = MainArm;
         RePoAmmo[1] = SideArm;
