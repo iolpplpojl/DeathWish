@@ -20,6 +20,7 @@ TagManager:
   - Exit
   - Floor
   - MusicManager
+  - DownExit
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Bullet
   - Blood
   - Wall
-  - 
+  - Exit
   - 
   - 
   - 

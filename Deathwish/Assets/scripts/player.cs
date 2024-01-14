@@ -39,8 +39,15 @@ public class player : MonoBehaviour
         if (collision.CompareTag("Exit") && GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>().Getclear() == true)
         {
             collision.GetComponent<ExitDoor>().exitdoor();
+            GameObject.FindWithTag("DownExit").transform.GetChild(0).gameObject.SetActive(true);
             GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>().goNextFloor();
-        }   
+        }
+        if (collision.CompareTag("DownExit"))
+        {
+            Debug.Log("asdadsa");
+            collision.GetComponent<ExitDoor>().exitdoor();
+            GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>().goBackFloor();
+        }
 
     }
     // Update is called once per frame
@@ -79,9 +86,10 @@ public class player : MonoBehaviour
     }
     public void Restart()
     {
-        ded = false;
-        transform.position = StartTransform;
+        transform.position = StartTransform;    
         health = 100;
+        ded = false;
+
     }
     public bool getded()
     {

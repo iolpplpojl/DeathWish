@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5412978870464477238}
   - component: {fileID: 4028987948735470421}
+  - component: {fileID: -6611981309746005112}
   m_Layer: 0
   m_Name: DeadBody
   m_TagString: Untagged
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-6611981309746005112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471749325345063256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892682a5886a74d4a87d5c2444885686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

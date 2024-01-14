@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
                     Debug.Log("DED");
                     Dead();
                     GameObject body = Instantiate(Body, transform.position, Body.transform.rotation*collision.transform.rotation);
+                    body.GetComponent<BodyMove>().SetBlood(Random.Range(10, 20), Random.Range(3.0f, 4.0f));
                     body.transform.SetParent(EM.transform, true);
                 }
                 Debug.Log("ouch");

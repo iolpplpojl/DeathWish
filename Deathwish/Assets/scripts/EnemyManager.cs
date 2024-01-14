@@ -25,6 +25,11 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("Clear");
             clear = true;
+            SceneManage bar = GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>();
+            if (bar.LastScene-1 == bar.NowScene)
+            {
+                GameObject.FindWithTag("DownExit").transform.GetChild(0).gameObject.SetActive(true);
+            }
         }
     }
     public bool Getclear()

@@ -7,18 +7,19 @@ public class SceneManage : MonoBehaviour
     // Start is called before the first frame update
     public bool check;
 
-    public int LastScene = 0;
     public int NowScene = 0;
     public int LoadingScene = 0;
     bool firstload = true;
     public bool Loading;
     Restart Restart;
-    string[] FloorNames = {null, null, null, null};
+    string[] FloorNames;
     GameObject[] Floors = {null,null,null,null};
     int FloorIndexs = 0;
     MusicManager Music;
-    string[] Scenes = {null, null,null, null};
+    string[] Scenes;
     bool RestartDataSeted = false;
+    public int LastScene;
+
     private void Update()
     {
         playerScene();
@@ -72,7 +73,7 @@ public class SceneManage : MonoBehaviour
     void setActiveScene()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(Scenes[LoadingScene]));
-        Floors[FloorIndexs] = GameObject.Find(FloorNames[FloorIndexs]);
+        Floors[FloorIndexs] = GameObject.Find(FloorNames[FloorIndexs]);                                                         
         check = false;
         Loading = false;
         if (RestartDataSeted == false)
@@ -90,9 +91,19 @@ public class SceneManage : MonoBehaviour
     public void goBackFloor()
     {
 
-        Floors[FloorIndexs].SetActive(false);
-        Floors[FloorIndexs-1].SetActive(true);
-        FloorIndexs--;
+        if (FloorIndexs != 0)
+        {
+            Floors[FloorIndexs].SetActive(false);
+            FloorIndexs--;
+            Floors[FloorIndexs].SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Clear!!!");
+            SceneManager.LoadScene("MainMenu");
+
+        }
+
 
     }
     public void StartLoad(int MusicIndex)
@@ -108,14 +119,11 @@ public class SceneManage : MonoBehaviour
     }
     public void SetScene(string[] Floors, string[] SceneNames)
     {
-        for(int i = 0; i < Floors.Length; i++)
-        {
-            FloorNames[i] = Floors[i];
-        }
-        for(int i = 0; i < SceneNames.Length; i++)
-        {
-            Scenes[i] = SceneNames[i]; 
-        }
+
+        FloorNames = Floors;
+        Scenes = SceneNames;
+        LastScene = Scenes.Length;
+
     }
 
 }
