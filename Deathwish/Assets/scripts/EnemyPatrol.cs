@@ -21,12 +21,16 @@ public class EnemyPatrol : MonoBehaviour
     EnemyGunFire Fire;
     Vector3 lastwatch;
     NavMeshAgent agent;
+    GameObject Player;
+    player PlayerHealth;
     void Start()
     {
         level = 0;
         agent = GetComponent<NavMeshAgent>();
         Fire = GetComponent<EnemyGunFire>();
-        target = GameObject.FindWithTag("Player").transform;
+        Player = GameObject.FindWithTag("Player");
+        target = Player.transform;
+        PlayerHealth = Player.GetComponent<player>();
         agent.enabled = false;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -46,8 +50,14 @@ public class EnemyPatrol : MonoBehaviour
         // Vector3 aimDir = (targetPosition - transform.position).normalized;
         //  fieldOfview.SetOrigin(transform.position);
         // fieldOfview.SetAimDirection(aimDir);
+        if (PlayerHealth.getded() == true)
+        {
+            level = 900;
+            agent.enabled = false;
+        }
         if (patrolPoints.Length == 0)
         {
+
         }
         else if (level == 0 && notreturn == false)
         {
@@ -96,7 +106,7 @@ public class EnemyPatrol : MonoBehaviour
        //     Debug.Log("Hit object: " + hit.collider.gameObject.name);
        // }
 
-        if (hits.Length > 1)
+        if (hits.Length > 1 && PlayerHealth.getded() == false)
         {
             if (hits[0].collider.name == "shotTrigger" && hits[1].collider.name == "player")
             {

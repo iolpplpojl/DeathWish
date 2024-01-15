@@ -74,6 +74,10 @@ public class ScoreManager : MonoBehaviour
     }
     public void Checkpoint()
     {
+        if(gocombo == true)
+        {
+            Scoring();
+        }
         Combo = 0;
         WhileCombo = 0;
         gocombo = false;

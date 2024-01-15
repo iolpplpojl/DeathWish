@@ -29,7 +29,7 @@ public class Restart : MonoBehaviour
         {
             death = false;
         }
-        if (Input.GetKeyDown(KeyCode.F) && death == true)
+        if (Input.GetKey(KeyCode.F) && death == true)
         {
             player.SetActive(true);
             PlayerPos.Restart();

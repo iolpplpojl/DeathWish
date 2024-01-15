@@ -20,18 +20,20 @@ public class SceneManage : MonoBehaviour
     bool RestartDataSeted = false;
     public int LastScene;
 
+
     private void Update()
     {
         playerScene();
-        if (Input.GetKeyDown(KeyCode.F) && Restart.GetDeath() == true)
+        if (Input.GetKey(KeyCode.F) && Restart.GetDeath() == true && Loading == false)
         {
+            Loading = true;
             RestartFloor();
         }
 
-        if (Loading == true && SceneManager.GetSceneByName(Scenes[LoadingScene]).isLoaded)
-        {
-            setActiveScene();
-        }
+        //if (Loading == true && SceneManager.GetSceneByName(Scenes[LoadingScene]).isLoaded)
+        //{
+           // setActiveScene();
+        //}
 
         if (check == true)
         {
@@ -50,16 +52,32 @@ public class SceneManage : MonoBehaviour
         SceneManager.LoadScene(Scenes[LoadingScene], LoadSceneMode.Additive);
 
         RestartDataSeted = false;
+        StartCoroutine(WaitLoad());
+
     }
+
     void RestartFloor()
     {
+        StartCoroutine(RestartFloorCR());
+    }
+    IEnumerator RestartFloorCR()
+    {
+        yield return new WaitForFixedUpdate();
         if (SceneManager.GetSceneByName(Scenes[NowScene]).isLoaded)
         {
             SceneManager.UnloadSceneAsync(Scenes[NowScene]);
         }
+        yield return new WaitUntil(() => !SceneManager.GetSceneByName(Scenes[NowScene]).isLoaded);
         SceneManager.LoadScene(Scenes[NowScene], LoadSceneMode.Additive);
-        Loading = true;
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(Scenes[NowScene]).isLoaded);
         LoadingScene = NowScene;
+        setActiveScene();
+
+    }
+    IEnumerator WaitLoad()
+    {
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(Scenes[NowScene]).isLoaded);
+        setActiveScene();
     }
     void playerScene()
     {
@@ -73,13 +91,14 @@ public class SceneManage : MonoBehaviour
     void setActiveScene()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(Scenes[LoadingScene]));
-        Floors[FloorIndexs] = GameObject.Find(FloorNames[FloorIndexs]);                                                         
-        check = false;
-        Loading = false;
+        Floors[FloorIndexs] = GameObject.Find(FloorNames[FloorIndexs]);
         if (RestartDataSeted == false)
         {
             setRestartData();
         }
+        check = false;
+        Loading = false;
+        //GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>().SetEnemy();
     }
     void setRestartData()
     {
@@ -115,7 +134,8 @@ public class SceneManage : MonoBehaviour
         LoadingScene = 0;
         Music = GameObject.FindWithTag("MusicManager").GetComponent<MusicManager>();
         Music.ChangeIndex(MusicIndex);
-        Floors[FloorIndexs] = GameObject.Find(FloorNames[FloorIndexs]);
+        StartCoroutine(WaitLoad());
+
     }
     public void SetScene(string[] Floors, string[] SceneNames)
     {

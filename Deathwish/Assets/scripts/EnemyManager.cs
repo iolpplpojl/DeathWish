@@ -36,4 +36,11 @@ public class EnemyManager : MonoBehaviour
     {
         return clear;
     }
+    public void SetEnemy()
+    {
+        for (int i = 0; i < Count; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
 }
