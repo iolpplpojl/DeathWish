@@ -76,7 +76,9 @@ public class player : MonoBehaviour
     }
     public void Death()
     {
+        GameObject.FindWithTag("DownExit").transform.GetChild(0).gameObject.SetActive(false);
         Debug.Log("DED");
+        GetComponentInChildren<MeleeAttack>().ResetMelee();
         ded = true;
         gameObject.SetActive(false);
     }

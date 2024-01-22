@@ -87,4 +87,11 @@ public class Enemy : MonoBehaviour
         Count.Kill();
         gameObject.SetActive(false);
     }
+    public void MeleeAttacked()
+    {
+        if (dead == false)
+        {
+            Dead();
+        }
+    }
 }

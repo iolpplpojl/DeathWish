@@ -6,7 +6,7 @@ public class SceneManage : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool check;
-
+    string NowStage;
     public int NowScene = 0;
     public int LoadingScene = 0;
     bool firstload = true;
@@ -119,7 +119,7 @@ public class SceneManage : MonoBehaviour
         else
         {
             Debug.Log("Clear!!!");
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("ResultScreen", LoadSceneMode.Additive);
 
         }
 
@@ -137,15 +137,19 @@ public class SceneManage : MonoBehaviour
         StartCoroutine(WaitLoad());
 
     }
-    public void SetScene(string[] Floors, string[] SceneNames)
+    public void SetScene(string Stage,string[] Floors, string[] SceneNames)
     {
-
+        NowStage = Stage;
         FloorNames = Floors;
         Scenes = SceneNames;
         LastScene = Scenes.Length;
 
     }
 
+    public string GetNowStage()
+    {
+        return NowStage;
+    }
 }
 
 

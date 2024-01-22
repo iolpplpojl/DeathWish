@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+    
     }
     public void Kill()
     {
@@ -31,6 +31,10 @@ public class EnemyManager : MonoBehaviour
                 GameObject.FindWithTag("DownExit").transform.GetChild(0).gameObject.SetActive(true);
             }
         }
+    }
+    public void playerDead()
+    {
+        clear = false;
     }
     public bool Getclear()
     {

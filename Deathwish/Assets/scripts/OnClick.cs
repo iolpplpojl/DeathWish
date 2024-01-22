@@ -10,6 +10,7 @@ public class OnClick : MonoBehaviour
     // Update is called once per frame
     public string[] FloorNames;
     public string[] SceneNames;
+    public string StageName;
     public int buttonindex;
     public int MusicIndex;
     int onbutton;
@@ -31,7 +32,7 @@ public class OnClick : MonoBehaviour
         if (SceneManager.GetSceneByName("SceneManager").isLoaded && onbutton == buttonindex)
         {
             SceneManage SCENE = GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>();
-            SCENE.SetScene(FloorNames, SceneNames);
+            SCENE.SetScene(StageName,FloorNames, SceneNames);
             SCENE.StartLoad(MusicIndex);
             SceneManager.UnloadSceneAsync("Mainmenu");
         }
