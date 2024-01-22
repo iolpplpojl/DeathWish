@@ -87,11 +87,14 @@ public class Enemy : MonoBehaviour
         Count.Kill();
         gameObject.SetActive(false);
     }
-    public void MeleeAttacked()
+    public void MeleeAttacked(Quaternion rotate)
     {
         if (dead == false)
         {
             Dead();
+            GameObject body = Instantiate(Body, transform.position, Body.transform.rotation * rotate);
+            body.GetComponent<BodyMove>().SetBlood(Random.Range(10, 20), Random.Range(3.0f, 4.0f));
+            body.transform.SetParent(EM.transform, true);
         }
     }
 }

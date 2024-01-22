@@ -21,7 +21,7 @@ public class MeleeAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && Attacked == false)
         {
-            StartCoroutine(Melee());
+            StartCoroutine(Melee(transform.rotation));
         }
     }
 
@@ -29,7 +29,7 @@ public class MeleeAttack : MonoBehaviour
     {
         Attacked = false;
     }
-    IEnumerator Melee()
+    IEnumerator Melee(Quaternion rotate)
     {
         Attacked = true;
         Vector2 fanDirection = transform.up; // 기본적으로 오른쪽 방향을 기준으로 함
@@ -51,7 +51,7 @@ public class MeleeAttack : MonoBehaviour
                 if (hit.collider.CompareTag("Enemy"))
                 {
                     Debug.Log("melee");
-                    hit.collider.GetComponent<Enemy>().MeleeAttacked();
+                    hit.collider.GetComponent<Enemy>().MeleeAttacked(rotate);
                 }
             }
             else

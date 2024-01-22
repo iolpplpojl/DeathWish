@@ -380,6 +380,10 @@ PrefabInstance:
       propertyPath: shotpoint
       value: 
       objectReference: {fileID: 7735296778180859684}
+    - target: {fileID: 7633068145751376002, guid: 49c71dd0b3ac80948b7b21c2d78e6dce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8055332575209177113, guid: 49c71dd0b3ac80948b7b21c2d78e6dce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.27
