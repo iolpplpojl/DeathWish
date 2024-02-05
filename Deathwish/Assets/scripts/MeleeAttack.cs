@@ -58,7 +58,6 @@ public class MeleeAttack : MonoBehaviour
             {
                 Debug.DrawRay(transform.position, rotatedDirection * fanRadius, Color.red);
             }
-            yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(AttackTime);
         Attacked = false;

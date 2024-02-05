@@ -10,6 +10,7 @@ public class ResultUI : MonoBehaviour
     SceneManage SceneManage;
     Text txt1;
     Text txt2;
+    bool clicked = false;
     void Start()
     {
         txt1 = transform.GetChild(1).GetComponent<Text>();
@@ -39,9 +40,19 @@ public class ResultUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && clicked == false)
         {
-            SceneManager.LoadScene("Mainmenu"); 
+            StartEnd();
         }
+        if (clicked == true && SceneManage.getFadeValue() >= 1f)
+        {
+            SceneManager.LoadScene("Mainmenu");
+        }
+    }
+
+    void StartEnd()
+    {
+        clicked = true;
+        SceneManage.goFadeIn();
     }
 }

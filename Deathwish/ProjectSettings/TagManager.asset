@@ -21,6 +21,8 @@ TagManager:
   - Floor
   - MusicManager
   - DownExit
+  - DialogueManager
+  - LoadingDataScene
   layers:
   - Default
   - TransparentFX

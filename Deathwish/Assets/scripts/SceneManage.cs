@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class SceneManage : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -19,8 +20,13 @@ public class SceneManage : MonoBehaviour
     string[] Scenes;
     bool RestartDataSeted = false;
     public int LastScene;
-
-
+    Image fadein;
+    float fadein_A;
+    private void Start()
+    {
+        fadein = GetComponentInChildren<Image>();
+        fadein_A = 1;
+    }
     private void Update()
     {
         playerScene();
@@ -44,6 +50,7 @@ public class SceneManage : MonoBehaviour
     }
     public void goNextFloor()
     {
+        FadeIn();
         Floors[FloorIndexs].SetActive(false);
         FloorIndexs++;
         Loading = true;
@@ -62,6 +69,7 @@ public class SceneManage : MonoBehaviour
     }
     IEnumerator RestartFloorCR()
     {
+        FadeIn();
         yield return new WaitForFixedUpdate();
         if (SceneManager.GetSceneByName(Scenes[NowScene]).isLoaded)
         {
@@ -73,6 +81,40 @@ public class SceneManage : MonoBehaviour
         LoadingScene = NowScene;
         setActiveScene();
 
+    }
+    
+    void FadeIn()
+    {
+        fadein.color = new Color(0, 0, 0, 1f);
+        fadein_A = 1;
+    }
+    public float getFadeValue()
+    {
+        return fadein_A;
+    }
+    IEnumerator FadeOut()
+    {
+        while (fadein_A >= 0)
+        {
+            fadein_A -= 0.04f;
+            fadein.color = new Color(0, 0, 0, fadein_A);
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    public void goFadeIn()
+    {
+        StartCoroutine(FadeIn_Time());
+    }
+
+    IEnumerator FadeIn_Time()
+    {
+        while (fadein_A <= 1)
+        {
+            fadein_A += 0.06f;
+            fadein.color = new Color(0, 0, 0, fadein_A);
+            yield return new WaitForFixedUpdate();
+        }
     }
     IEnumerator WaitLoad()
     {
@@ -96,6 +138,7 @@ public class SceneManage : MonoBehaviour
         {
             setRestartData();
         }
+        StartCoroutine(FadeOut());
         check = false;
         Loading = false;
         //GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>().SetEnemy();

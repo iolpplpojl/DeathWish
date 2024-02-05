@@ -15,6 +15,7 @@ public class EnemyPatrol : MonoBehaviour
     private bool itworked;
     private bool notreturn;
     private bool Checkpatrol;
+    bool patrolstop = false;
     public bool hasgun;
     public Quaternion lastrotation;
     [SerializeField] Transform target;
@@ -59,13 +60,9 @@ public class EnemyPatrol : MonoBehaviour
         {
 
         }
-        else if (level == 0 && notreturn == false)
+        else if (level == 0 && notreturn == false && patrolstop == false)
         {
             Patrol();
-        }
-        else if (level == 0 && notreturn == true)
-        {
-            goPatrol();
         }
         if (level == 1 && hasgun == false)
         {
@@ -131,7 +128,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (patrolPoints.Length != 0)
         {
-            if (collision.tag == patrolPoints[targetPoint].tag && itworked == false)
+            if (collision.tag == patrolPoints[targetPoint].tag && itworked == false && patrolstop == false)
             {
                 itworked = true;
                 notreturn = false;
@@ -156,7 +153,6 @@ public class EnemyPatrol : MonoBehaviour
 
     void goLastwatch()
     {
-        Debug.Log("Golast");
         agent.enabled = true;
 
         if (lastwatch != Vector3.zero)
@@ -184,9 +180,9 @@ public class EnemyPatrol : MonoBehaviour
     }
     void Follow()
     {
-        Debug.Log("Follow");
         agent.enabled = true;
         notreturn = true;
+        patrolstop = true;
         lastwatch = target.position;
         agent.SetDestination(target.position);
         transform.rotation = Quaternion.LookRotation(Vector3.forward,agent.velocity);
@@ -202,7 +198,6 @@ public class EnemyPatrol : MonoBehaviour
     }
     void bang()
     {
-        Debug.Log("Bang");
         agent.enabled = false;
 
         transform.rotation = Quaternion.LookRotation(Vector3.forward,target.position - transform.position);

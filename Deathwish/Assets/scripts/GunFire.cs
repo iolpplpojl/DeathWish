@@ -99,7 +99,6 @@ public class GunFire : MonoBehaviour
             shaky.m_FrequencyGain = nowrecoil;
             nowfirerate = firerate;
             Gunsound.Play();
-            Debug.Log(firerate);
 
         }
     }

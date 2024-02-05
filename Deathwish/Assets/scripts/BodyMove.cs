@@ -24,7 +24,6 @@ public class BodyMove : MonoBehaviour
             transform.Translate(Vector3.right * speed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
-        Debug.Log("BloodDead");
 
     }
     public void SetBlood(int MaxMove, float speed)

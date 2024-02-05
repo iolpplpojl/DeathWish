@@ -14,7 +14,6 @@ public class BloodMove : MonoBehaviour
     {
         SpRender = GetComponent<SpriteRenderer>();
         SpRender.sprite = sptires[Random.Range(0, sptires.Length)];
-        Debug.Log(maxmovement);
         StartCoroutine(MoveBlud());
     }
 
@@ -28,7 +27,6 @@ public class BloodMove : MonoBehaviour
             transform.Translate(Vector3.up * speed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
-        Debug.Log("BloodDead");
 
     }
     public void SetBlood(int MaxMove, float speed)
