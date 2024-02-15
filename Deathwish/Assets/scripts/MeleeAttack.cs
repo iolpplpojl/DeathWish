@@ -53,6 +53,10 @@ public class MeleeAttack : MonoBehaviour
                     Debug.Log("melee");
                     hit.collider.GetComponent<Enemy>().MeleeAttacked(rotate);
                 }
+                if (hit.collider.CompareTag("Item"))
+                {
+                    hit.collider.GetComponent<item>().ItemUse();
+                }
             }
             else
             {

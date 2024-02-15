@@ -24,6 +24,7 @@ public class EnemyPatrol : MonoBehaviour
     NavMeshAgent agent;
     GameObject Player;
     player PlayerHealth;
+    float RotateTimer;
     void Start()
     {
         level = 0;
@@ -82,7 +83,7 @@ public class EnemyPatrol : MonoBehaviour
         }
         if (level == 4)
         {
-            transform.rotation = lastrotation;
+           Finding();
         }
         // 발격음 위치로 이동
         // 만약 범위내에 플레이어가 있다면 : level 1
@@ -177,6 +178,20 @@ public class EnemyPatrol : MonoBehaviour
                 }
             }
         }
+    }
+
+
+
+    void Finding()
+    {
+        agent.enabled = false;
+        RotateTimer -= Time.deltaTime;
+        if (RotateTimer <= 0f)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, Random.Range(180f, -180f));
+            RotateTimer = Random.Range(0.45f, 2f);
+        }
+
     }
     void Follow()
     {

@@ -22,6 +22,7 @@ public class SceneManage : MonoBehaviour
     public int LastScene;
     Image fadein;
     float fadein_A;
+    bool isitblank;
     private void Start()
     {
         fadein = GetComponentInChildren<Image>();
@@ -146,7 +147,10 @@ public class SceneManage : MonoBehaviour
     void setRestartData()
     {
         GameObject.FindWithTag("Player").GetComponent<player>().SetPos();
-        GameObject.FindWithTag("gun").GetComponent<GunFire>().SetAmmo();
+        if (!isitblank)
+        {
+            GameObject.FindWithTag("gun").GetComponent<GunFire>().SetAmmo();
+        }
         GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>().Checkpoint();
         RestartDataSeted = true;
     }
@@ -155,6 +159,8 @@ public class SceneManage : MonoBehaviour
 
         if (FloorIndexs != 0)
         {
+            FadeIn();
+            StartCoroutine(FadeOut());
             Floors[FloorIndexs].SetActive(false);
             FloorIndexs--;
             Floors[FloorIndexs].SetActive(true);
@@ -171,7 +177,15 @@ public class SceneManage : MonoBehaviour
     public void StartLoad(int MusicIndex)
     {
         Debug.Log("AAA");
-        SceneManager.LoadScene("PlayLogicScene", LoadSceneMode.Additive);
+        if (isitblank)
+        {
+            SceneManager.LoadScene("PlayLogicScene_Nohand", LoadSceneMode.Additive);
+        }
+        else
+        {
+            SceneManager.LoadScene("PlayLogicScene", LoadSceneMode.Additive);
+
+        }
         SceneManager.LoadScene(Scenes[NowScene], LoadSceneMode.Additive);
         Loading = true;
         LoadingScene = 0;
@@ -180,11 +194,12 @@ public class SceneManage : MonoBehaviour
         StartCoroutine(WaitLoad());
 
     }
-    public void SetScene(string Stage,string[] Floors, string[] SceneNames)
+    public void SetScene(string Stage,string[] Floors, string[] SceneNames,bool isitblank)
     {
         NowStage = Stage;
         FloorNames = Floors;
         Scenes = SceneNames;
+        this.isitblank = isitblank;
         LastScene = Scenes.Length;
 
     }

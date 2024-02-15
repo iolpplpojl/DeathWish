@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     string[] FloorName;
     string StageName;
     int MusicIndex;
+    bool isitblank;
 
 
     public Dialouge[] Digs;
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     public bool DialogueOpened;
     private IEnumerator OpenCourtine;
     private IEnumerator DeadCourtine;
+    StopManager stoper;
     void Start()
     {
         OpenCourtine = WaitUntilAnimOpen();
@@ -32,6 +34,7 @@ public class DialogueManager : MonoBehaviour
         words = new Queue<string>();
         animator = GetComponentInChildren<Animator>();
         DialogueOpened = false;
+        stoper = GameObject.FindWithTag("StopManager").GetComponent<StopManager>();
     }
 
     // Update is called once per frame
@@ -42,8 +45,9 @@ public class DialogueManager : MonoBehaviour
         Digs = Dig;
         DialogueIndex = 0;
         StartDialogue(Digs[DialogueIndex]);
+        stoper.changebool(true);
     }
-    public void setLoadStatus(string[] SceneName, string[] FloorName,string StageName,int MusicIndex)
+    public void setLoadStatus(string[] SceneName, string[] FloorName,string StageName,int MusicIndex,bool isitblank)
     {
         LoadCheck = true;
         this.SceneName = SceneName;
@@ -90,6 +94,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            stoper.changebool(false);
             if (LoadCheck)
             {
                 LoadScene();
@@ -118,7 +123,7 @@ public class DialogueManager : MonoBehaviour
                         SceneManager.UnloadSceneAsync(scene);       
                     }
                 }
-                SCENE.SetScene(StageName, FloorName, SceneName, MusicIndex);
+                SCENE.SetScene(StageName, FloorName, SceneName, MusicIndex,isitblank);
                 SceneManager.UnloadSceneAsync("PlayLogicScene");
 
                 LoadDone = true;

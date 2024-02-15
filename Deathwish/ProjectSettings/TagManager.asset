@@ -23,6 +23,8 @@ TagManager:
   - DownExit
   - DialogueManager
   - LoadingDataScene
+  - Item
+  - ExitManager
   layers:
   - Default
   - TransparentFX
@@ -35,7 +37,7 @@ TagManager:
   - Wall
   - Exit
   - Enemy
-  - 
+  - Item
   - 
   - 
   - 

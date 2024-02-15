@@ -13,13 +13,23 @@ public class DialogueTrigger : MonoBehaviour
     public string[] FloorName;
     public string StageName;
     public int MusicIndex;
+    public bool goStart;
+    public bool isitblank;
 
     public void TriggerDialogue()
     {
         DialogueManager Manager = GameObject.FindWithTag("DialogueManager").GetComponent<DialogueManager>();
         Manager.RecieveDialogue(Diag);
         if (LoadScene) {
-            Manager.setLoadStatus(SceneName,SceneName,StageName,MusicIndex);
+            Manager.setLoadStatus(SceneName,SceneName,StageName,MusicIndex,isitblank);
+        }
+    }
+
+    private void Start()
+    {
+        if(goStart == true)
+        {
+            TriggerDialogue();
         }
     }
 }

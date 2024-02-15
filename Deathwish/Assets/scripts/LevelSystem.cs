@@ -11,6 +11,10 @@ public class LevelSystem : MonoBehaviour
         {
             transform.GetChild(1).gameObject.SetActive(true);
         }
+        if (PlayerPrefs.GetInt("Scene1") > 0)
+        {
+            transform.GetChild(2).gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame

@@ -39,7 +39,7 @@ public class player : MonoBehaviour
         if (collision.CompareTag("Exit") && GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>().Getclear() == true)
         {
             collision.GetComponent<ExitDoor>().exitdoor();
-            GameObject.FindWithTag("DownExit").transform.GetChild(0).gameObject.SetActive(true);
+            GameObject.FindWithTag("ExitManager").GetComponent<ExitManager>().GoNext();
             GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>().goNextFloor();
         }
         if (collision.CompareTag("DownExit"))
@@ -53,11 +53,9 @@ public class player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (stop.GetStop() == false)
-        {
-            inputVec.x = Input.GetAxisRaw("Horizontal");
-            inputVec.y = Input.GetAxisRaw("Vertical");
-        }
+
+        inputVec.x = Input.GetAxisRaw("Horizontal");
+        inputVec.y = Input.GetAxisRaw("Vertical");
         if (health < 0)
         {
             Death();
@@ -65,8 +63,11 @@ public class player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector2 norVec = inputVec.normalized * speed * Time.fixedDeltaTime;
-        Rigid.MovePosition(Rigid.position + norVec);
+        if (stop.GetStop() == false)
+        {
+            Vector2 norVec = inputVec.normalized * speed * Time.fixedDeltaTime;
+            Rigid.MovePosition(Rigid.position + norVec);
+        }
     }
     void getammo(Collider2D collision)
     {
@@ -76,7 +77,6 @@ public class player : MonoBehaviour
     }
     public void Death()
     {
-        GameObject.FindWithTag("DownExit").transform.GetChild(0).gameObject.SetActive(false);
         Debug.Log("DED");
         GetComponentInChildren<MeleeAttack>().ResetMelee();
         ded = true;

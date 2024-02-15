@@ -29,12 +29,14 @@ public class Restart : MonoBehaviour
         {
             death = false;
         }
-        if (Input.GetKey(KeyCode.F) && death == true)
+        if (Input.GetKeyDown(KeyCode.F) && death == true)
         {
+            GameObject.FindWithTag("ExitManager").GetComponent<ExitManager>().Death();
             player.SetActive(true);
             PlayerPos.Restart();
             gun.Refill();
         }
+
     }
     public bool GetDeath()
     {

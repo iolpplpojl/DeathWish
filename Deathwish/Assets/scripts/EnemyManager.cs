@@ -7,17 +7,16 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     public int Count = 0;
     bool clear = false;
+    ExitManager Exit;
     void Start()
     {
         Count = transform.childCount;
         Debug.Log(Count);
+        Exit = GameObject.FindWithTag("ExitManager").GetComponent<ExitManager>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-    
-    }
+
     public void Kill()
     {
         Count--;
@@ -25,11 +24,7 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("Clear");
             clear = true;
-            SceneManage bar = GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>();
-            if (bar.LastScene-1 == bar.NowScene)
-            {
-                GameObject.FindWithTag("DownExit").transform.GetChild(0).gameObject.SetActive(true);
-            }
+            Exit.goCheck();
         }
     }
     public void playerDead()

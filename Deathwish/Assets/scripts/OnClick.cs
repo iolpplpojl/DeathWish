@@ -14,6 +14,7 @@ public class OnClick : MonoBehaviour
     public int buttonindex;
     public int MusicIndex;
     int onbutton;
+    public bool isitblank;
     //public Datas[] Mapdata;
   //  public int index;
   //  [Serializable]
@@ -32,7 +33,7 @@ public class OnClick : MonoBehaviour
         if (SceneManager.GetSceneByName("SceneManager").isLoaded && onbutton == buttonindex)
         {
             SceneManage SCENE = GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>();
-            SCENE.SetScene(StageName,FloorNames, SceneNames);
+            SCENE.SetScene(StageName,FloorNames, SceneNames,isitblank);
             SCENE.StartLoad(MusicIndex);
             SceneManager.UnloadSceneAsync("Mainmenu");
         }
