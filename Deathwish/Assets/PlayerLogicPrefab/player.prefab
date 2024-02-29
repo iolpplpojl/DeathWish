@@ -176,6 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 9.5
+  Body: {fileID: 2471749325345063256, guid: a4c6951a99973d142aa1fa75042040e3, type: 3}
+  Blood: {fileID: 3640483067856713420, guid: 9ef6e03cfa304cf4b84074f7ba97b8a6, type: 3}
 --- !u!61 &924742010565228212
 BoxCollider2D:
   m_ObjectHideFlags: 0

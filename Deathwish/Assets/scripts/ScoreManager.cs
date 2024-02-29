@@ -63,7 +63,7 @@ public class ScoreManager : MonoBehaviour
         int mScore = 300;
         for (int i = 1; i<WhileCombo; i++)
         {
-            mScore = (mScore*20)/10;
+            mScore = (mScore*13)/10;
         }
         Score += (mScore/10)*10;
         WhileCombo = 0;

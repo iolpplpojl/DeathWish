@@ -38,6 +38,11 @@ public class Restart : MonoBehaviour
         }
 
     }
+
+    public void Setinv()
+    {
+        PlayerPos.Setinv(false);
+    }
     public bool GetDeath()
     {
         return death;

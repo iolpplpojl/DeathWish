@@ -25,6 +25,7 @@ TagManager:
   - LoadingDataScene
   - Item
   - ExitManager
+  - pauser
   layers:
   - Default
   - TransparentFX

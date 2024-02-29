@@ -31,7 +31,7 @@ public class SceneManage : MonoBehaviour
     private void Update()
     {
         playerScene();
-        if (Input.GetKey(KeyCode.F) && Restart.GetDeath() == true && Loading == false)
+        if (Input.GetKeyDown(KeyCode.F) && Restart.GetDeath() == true && Loading == false)
         {
             Loading = true;
             RestartFloor();
@@ -80,7 +80,7 @@ public class SceneManage : MonoBehaviour
         SceneManager.LoadScene(Scenes[NowScene], LoadSceneMode.Additive);
         yield return new WaitUntil(() => SceneManager.GetSceneByName(Scenes[NowScene]).isLoaded);
         LoadingScene = NowScene;
-        setActiveScene();
+        setActiveScene(true);
 
     }
     
@@ -144,6 +144,21 @@ public class SceneManage : MonoBehaviour
         Loading = false;
         //GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>().SetEnemy();
     }
+    void setActiveScene(bool ahah)
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(Scenes[LoadingScene]));
+        Floors[FloorIndexs] = GameObject.Find(FloorNames[FloorIndexs]);
+        if (RestartDataSeted == false)
+        {
+            setRestartData();
+        }
+        StartCoroutine(FadeOut());
+        check = false;
+        Loading = false;
+        Restart.Setinv();
+        //GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>().SetEnemy();
+    }
+
     void setRestartData()
     {
         GameObject.FindWithTag("Player").GetComponent<player>().SetPos();

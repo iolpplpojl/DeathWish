@@ -176,3 +176,4 @@ MonoBehaviour:
   maxRayDistance: 0
   damage: 120
   whoshot: enemy
+  hited: 0
