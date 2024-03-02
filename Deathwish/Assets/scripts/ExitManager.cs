@@ -9,13 +9,15 @@ public class ExitManager : MonoBehaviour
     public GameObject DownExit;
     public EnemyManager Enemy;
     public item item;
+    exitdirect exitdirect;
     SceneManage bar;
     Restart RestartManager;
-
+    bool exitdirected = false;
     private void Start()
     {
          bar = GameObject.FindWithTag("SceneManager").GetComponent<SceneManage>();
          RestartManager = GameObject.FindWithTag("RestartManager").GetComponent<Restart>();
+         exitdirect = GameObject.FindWithTag("exitdirect").GetComponent<exitdirect>();
     }
     public void goCheck()
     {
@@ -24,10 +26,14 @@ public class ExitManager : MonoBehaviour
             if (bar.LastScene - 1 == bar.NowScene)
             {
                 DownExit.gameObject.SetActive(true);
+                exitdirect.direction(DownExit.transform);
+                exitdirected = true;
+
             }
             else
             {
                 Exit.gameObject.SetActive(true);
+                exitdirect.direction(Exit.transform);
             }
         }
     }
@@ -42,11 +48,15 @@ public class ExitManager : MonoBehaviour
         {
             Exit.gameObject.SetActive(false);
         }
+        exitdirect.exited();
+
     }
 
     public void GoNext()
     {
+        exitdirect.exited();
         DownExit.gameObject.SetActive(true);
+        exitdirect.downdirectionadd(DownExit.transform);
     }
     bool EnemyCheck()
     {

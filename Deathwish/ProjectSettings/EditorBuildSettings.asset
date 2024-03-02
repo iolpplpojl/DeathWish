@@ -39,6 +39,9 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayLogicScene_Nohand.unity
     guid: a5d990e518ce8214899cb127bbd6faf4
   - enabled: 1
+    path: Assets/Scenes/Level2-2.unity
+    guid: d864ef22a0fbb4b45a6aeeb269e720cb
+  - enabled: 1
     path: Assets/Scenes/level2.unity
     guid: b33d82ac0ac0b9c42a35f2c75a9d7d69
   - enabled: 1

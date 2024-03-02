@@ -127,8 +127,8 @@ public class GunSelect : MonoBehaviour
                 gunspeed[0] = 50;
                 Fullauto[0] = true;
                 recoil[0] = 1f;
-                Mainmaxammo = 24;
-                MainArmAmmo = 24;
+                Mainmaxammo = 18;
+                MainArmAmmo = 0;
                 guntype[0] = 0;
                 gunfirerate[0] = 0.08f;
                 reloadtime[0] = 0.50f;
@@ -152,7 +152,7 @@ public class GunSelect : MonoBehaviour
                 Fullauto[0] = false;
                 recoil[0] = 3f;
                 Mainmaxammo = 6;
-                MainArmAmmo = 6;
+                MainArmAmmo = 2;
                 guntype[0] = 1;
                 gunfirerate[0] = 0.75f;
                 reloadtime[0] = 0.6f;
@@ -179,7 +179,7 @@ public class GunSelect : MonoBehaviour
                 Fullauto[1] = false;
                 recoil[1] = 0.75f;
                 Sidemaxammo = 7;
-                SideArmAmmo = 21;
+                SideArmAmmo = 0;
                 guntype[1] = 0;
                 gunfirerate[1] = 0.03f;
                 reloadtime[1] = 0.45f;
@@ -203,7 +203,7 @@ public class GunSelect : MonoBehaviour
                 Fullauto[1] = true;
                 recoil[1] = 0.75f;
                 Sidemaxammo = 12;
-                SideArmAmmo = 24;
+                SideArmAmmo = 18;
                 guntype[1] = 0;
                 gunfirerate[1] = 0.044f;
                 reloadtime[1] = 0.45f;

@@ -186,7 +186,8 @@ public class SceneManage : MonoBehaviour
             SceneManager.LoadScene("ResultScreen", LoadSceneMode.Additive);
 
         }
-
+        exitdirect exitdirect = GameObject.FindWithTag("exitdirect").GetComponent<exitdirect>();
+        exitdirect.downdirectionpop();
 
     }
     public void StartLoad(int MusicIndex)
